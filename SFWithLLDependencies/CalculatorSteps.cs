@@ -1,6 +1,7 @@
 ﻿using System;
-using TechTalk.SpecFlow;
-using Example;
+using TechTalk.SpecFlow;    //for specflow 
+using Example;  //project with calculator
+using Microsoft.VisualStudio.TestTools.UnitTesting; //for assertion
 
 namespace SFWithLLDependencies
 {
@@ -8,6 +9,7 @@ namespace SFWithLLDependencies
     public class CalculatorSteps
     {
         private Calculator calculator = new Calculator();
+        private int result;
 
         [Given(@"I have entered (.*) into the calculator")]
         public void GivenIHaveEnteredIntoTheCalculator(int number)
@@ -24,13 +26,13 @@ namespace SFWithLLDependencies
         [When(@"I press add")]
         public void WhenIPressAdd()
         {
-            ScenarioContext.Current.Pending();
+            result = calculator.Add();
         }
         
         [Then(@"the result should be (.*) on the screen")]
-        public void ThenTheResultShouldBeOnTheScreen(int p0)
+        public void ThenTheResultShouldBeOnTheScreen(int expectedResult)
         {
-            ScenarioContext.Current.Pending();
+            Assert.AreEqual(expectedResult, result);
         }
     }
 }
